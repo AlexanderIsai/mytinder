@@ -16,7 +16,7 @@ public class UserController {
     private final UserRepository userRepository;
     private int count = 1;
 
-    public UserController(@Autowired @Qualifier(value = "shortNameUserService") UserService userService, @Autowired UserRepository userRepository) {
+    public UserController(@Autowired @Qualifier(value = "randomUserService") UserService userService, @Autowired UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
     }
@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping(value = "/show-new-user")
     public User showNewUser() {
         count++;
-        return userService.getUser(userRepository.getUsers());
+        return userService.getUser();
     }
 
     @GetMapping(value="/show-all-users")

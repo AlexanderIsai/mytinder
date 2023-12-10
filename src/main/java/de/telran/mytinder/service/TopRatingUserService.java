@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class TopRatingUserService implements UserService{
 
-    @Autowired
+    @Autowired//так делать плохо. Сделал специально, чтоб иметь 3 разные версии подключения зависимостей
     private UserRepository userRepository;
 
     @Override

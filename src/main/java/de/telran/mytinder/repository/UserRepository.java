@@ -1,28 +1,34 @@
 package de.telran.mytinder.repository;
-import de.telran.mytinder.User;
-import lombok.Getter;
-import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import de.telran.mytinder.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.NonNullApi;
+import org.springframework.lang.Nullable;
+
 import java.util.List;
-@Repository
-@Getter
-public class UserRepository {
 
-    private final List<User> users;
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    public UserRepository() {
-        this.users = new ArrayList<>();
-        initUsersTestData();
-    }
+    List<User> getUsersByNameStartingWithIgnoreCase(String name);
+    @Query("SELECT new User(u.id, u.name, u.rating, u.description) from User u " +
+            " where u.name like :name%") //JPQL
+    List<User> findAutocomplete3(@Param(value = "name") String name);
 
-    private void initUsersTestData() {
-        users.addAll(new ArrayList<>(List.of(
-                new User(1, "Petr", 100, "Just Petr"),
-                new User(2, "Anna", 150, "like cats"),
-                new User(3, "Pavel", 200, "hate dogs"),
-                new User(4, "Bob", 220, "unfortunately, not Bean")
-        )));
-    }
+    @Query(nativeQuery = true, value = "SELECT * FROM account WHERE name LIKE :name% ") //SQL
+    List<User> findAutocomplete2(@Param(value = "name") String name);
 
+    List<User> findUsersByRatingBetween(int from, int to);
+
+    List<User> findUsersByDescriptionContainingIgnoreCase(String text);
+
+    Integer countUsersByDescriptionContainsIgnoreCase(String text);
+//    @Query(nativeQuery = true)
+
+    Boolean existsUserById(Long id);
+    Page<User> findAll(@NonNull Pageable pageable);
 }

@@ -27,7 +27,6 @@ public class RandomUserService implements UserService {
         }
         Random random = new Random();
         int randomIndex = random.nextInt(users.size());
-        User randomUser = users.get(randomIndex);
         return users.get(randomIndex);
     }
 

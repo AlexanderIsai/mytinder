@@ -11,7 +11,6 @@ public class Photo {
     @Id
     @Column(name = "id")
     private Long id;
-
     @Column(name = "name")
     private String name;
     @ManyToOne

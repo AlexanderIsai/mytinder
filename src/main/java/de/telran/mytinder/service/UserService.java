@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface UserService {
 
-
     User getUser();
     List<User> getByName(String name);
 

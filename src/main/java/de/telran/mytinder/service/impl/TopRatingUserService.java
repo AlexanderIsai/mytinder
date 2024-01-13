@@ -19,7 +19,6 @@ import java.util.List;
 @Primary
 public class TopRatingUserService implements UserService {
 
-    private UserRepositoryImpl userRepositoryImpl;
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
 

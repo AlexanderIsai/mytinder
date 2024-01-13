@@ -19,10 +19,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " where u.name like :name%") //JPQL
     List<User> findAutocomplete3(@Param(value = "name") String name);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM account WHERE name LIKE :name% ") //SQL
+    @Query(nativeQuery = true, value = "SELECT * FROM users WHERE name LIKE :name% ") //SQL
     List<User> findAutocomplete2(@Param(value = "name") String name);
 
-    List<User> findUsersByRatingBetween(int from, int to);
+//
+    @Query(nativeQuery = true, value = "SELECT * FROM users WHERE rating BETWEEN :from AND :to")
+    List<User> findUsersByRatingBetween(@Param(value = "from") int from, @Param(value = "to") int to);
 
     List<User> findUsersByDescriptionContainingIgnoreCase(String text);
 

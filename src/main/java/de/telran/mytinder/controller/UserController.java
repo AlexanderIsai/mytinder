@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,19 @@ public class UserController {
         count++;
         return userService.getUser();
     }
+
+//    @GetMapping(value = "/show-new-user")
+//    public ResponseEntity<User> showNewUser() {
+//        User user = userService.getUser();
+//        count++;
+//        return ResponseEntity.badRequest().build();
+//        if (user != null){
+//            return ResponseEntity.ok(user); //200
+//        }
+//        else {
+//            return ResponseEntity.notFound().build(); //400
+//        }
+   // }
 
 
     @GetMapping(value = "/count")

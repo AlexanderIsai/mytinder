@@ -20,4 +20,5 @@ public class MyFirstAspect {
     public void doSomethingAfter() {
         System.out.println("Aspect is working, this is method shareRating after execution");
     }
+
 }

@@ -14,16 +14,16 @@ import org.springframework.stereotype.Service;
 public class RandomPointsService {
     private final UserRepository userRepository;
     private final RandomUserService randomUserService;
-    private final int POINTS = 13;
+    private final int POINTS = 100;
 
-    @Scheduled(cron = "0 23 22 * * *")
+    @Scheduled(cron = "0 55 13 * * *")
     public void addPoints() {
         User user = randomUserService.getUser();
         user.setRating(user.getRating() + POINTS);
         userRepository.save(user);
         log.info(user.getName() + " получил " + POINTS + " баллов");
     }
-    @Scheduled(cron = "0 23 22 * * *")
+    @Scheduled(cron = "0 50 23 * * *")
     public void takePoints() {
         User user = randomUserService.getUser();
         user.setRating(user.getRating() - POINTS);
